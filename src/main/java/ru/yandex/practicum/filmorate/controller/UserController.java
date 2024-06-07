@@ -8,32 +8,32 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.ModelType;
+import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.validation.CreateGroup;
 import ru.yandex.practicum.filmorate.validation.UpdateGroup;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/films")
+@RequestMapping("/users")
 @Slf4j
-public class FilmController extends AbstractController<Film> {
+public class UserController extends AbstractController<User> {
 
     @PostMapping
-    public Film createFilm(@Validated(CreateGroup.class) @RequestBody Film film) {
-        log.info("Получен запрос на создание сущности {}", film);
-        return super.create(film);
+    public User createUser(@Validated(CreateGroup.class) @RequestBody User user) {
+        log.info("Получен запрос на создание сущности {}", user);
+        return super.create(user);
     }
 
     @PutMapping
-    public Film updateFilm(@Validated(UpdateGroup.class) @RequestBody Film film) {
-        log.info("Получен запрос на изменение сущности {}", film);
-        return super.update(film);
+    public User updateUser(@Validated(UpdateGroup.class) @RequestBody User user) {
+        log.info("Получен запрос на изменение сущности {}", user);
+        return super.update(user);
     }
 
     @GetMapping
-    public Collection<Film> getFilms() {
-        log.info("Получен запрос на получение всех сущностей {}", ModelType.FILM);
-        return super.getAll(ModelType.FILM);
+    public Collection<User> getUsers() {
+        log.info("Получен запрос на получение всех сущностей {}", ModelType.USER);
+        return super.getAll(ModelType.USER);
     }
 }
