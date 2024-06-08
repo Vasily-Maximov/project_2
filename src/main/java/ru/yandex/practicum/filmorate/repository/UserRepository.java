@@ -5,11 +5,11 @@ import java.util.Collection;
 
 public interface UserRepository {
 
-    /*User create(User user);
+    User create(User user);
 
     User update(User user);
 
     Collection<User> getAll();
 
-    User findById(Integer id);*/
+    User findById(Integer id);
 }
