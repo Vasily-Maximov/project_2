@@ -1,16 +1,16 @@
-package ru.yandex.practicum.filmorate.controller;
+package ru.yandex.practicum.filmorate.repository;
 
 import lombok.extern.slf4j.Slf4j;
 import ru.yandex.practicum.filmorate.exeption.ObjectValidationException;
 import ru.yandex.practicum.filmorate.model.AbstractModel;
 import ru.yandex.practicum.filmorate.model.ModelType;
-import java.util.Map;
-import java.util.HashMap;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
-public abstract class AbstractController<T extends AbstractModel> {
+public abstract class AbstractRepository<T extends AbstractModel> {
 
     private final Map<Integer, T> data = new HashMap<>();
     private int globalId = 0;
