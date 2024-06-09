@@ -2,7 +2,6 @@ package ru.yandex.practicum.filmorate.service;
 
 import lombok.RequiredArgsConstructor;
 import ru.yandex.practicum.filmorate.model.AbstractModel;
-import ru.yandex.practicum.filmorate.model.ModelType;
 import ru.yandex.practicum.filmorate.repository.AbstractRepository;
 import java.util.Collection;
 
@@ -19,7 +18,10 @@ public abstract class AbstractService<T extends AbstractModel> {
         return abstractRepository.update(model);
     }
 
-    public Collection<T> getAll(ModelType modelType) {
-        return abstractRepository.getAll(modelType);
+    public Collection<T> getAll() {
+        return abstractRepository.getAll();
+    }
+    public T findById(int id) {
+        return abstractRepository.findById(id);
     }
 }

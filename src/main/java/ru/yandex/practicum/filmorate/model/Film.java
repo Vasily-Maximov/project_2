@@ -10,6 +10,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.Positive;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Slf4j
@@ -25,6 +27,7 @@ public class Film extends AbstractModel {
     private LocalDate releaseDate;
     @Positive(groups = {CreateGroup.class, UpdateGroup.class})
     private long duration;
+    private Set<Integer> likes;
 
     public Film(String name, String description, LocalDate releaseDate, long duration) {
         checkReleaseDate(releaseDate);
@@ -32,7 +35,7 @@ public class Film extends AbstractModel {
         this.description = description;
         this.releaseDate = releaseDate;
         this.duration = duration;
-        super.setModelType(ModelType.FILM);
+        this.likes = new HashSet<>();
     }
 
     private void checkReleaseDate(LocalDate releaseDate) {
@@ -41,5 +44,17 @@ public class Film extends AbstractModel {
             log.error(messageError);
             throw new ObjectValidationException(messageError);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Film{" +
+                "id='" + getId() + '\'' +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", releaseDate=" + releaseDate +
+                ", duration=" + duration +
+                ", ratings=" + likes +
+                '}';
     }
 }
