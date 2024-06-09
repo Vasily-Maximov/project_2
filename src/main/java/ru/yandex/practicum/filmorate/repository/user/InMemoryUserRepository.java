@@ -20,11 +20,11 @@ public class InMemoryUserRepository extends AbstractRepository<User> implements 
     }
     @Override
     public Collection<User> getAll() {
-        return null;
+        return super.getAll();
     }
 
     @Override
     public User findById(Integer id) {
-        return null;
+        return super.findById(id);
     }
 }

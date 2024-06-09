@@ -14,5 +14,4 @@ public class AbstractModel {
     @NotNull(groups = UpdateGroup.class)
     @Null(groups = CreateGroup.class)
     private Integer id;
-    private ModelType modelType;
 }

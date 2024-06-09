@@ -3,27 +3,39 @@ package ru.yandex.practicum.filmorate.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.Film;
-import ru.yandex.practicum.filmorate.model.ModelType;
 import ru.yandex.practicum.filmorate.repository.AbstractRepository;
-import java.util.Collection;
+import ru.yandex.practicum.filmorate.repository.UserRepository;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FilmService extends AbstractService<Film> {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    public FilmService(AbstractRepository<Film> abstractRepository) {
+    public FilmService(AbstractRepository<Film> abstractRepository, UserRepository userRepository) {
         super(abstractRepository);
+        this.userRepository = userRepository;
     }
 
-    public Film create(Film film) {
-        return super.create(film);
+    public void addLike(Integer filmId, Integer userId) {
+        Film film = super.findById(filmId);
+        userRepository.findById(userId);
+        film.getLikes().add(userId);
     }
 
-    public Film update(Film film) {
-        return super.update(film);
+    public void delLike(Integer filmId, Integer userId) {
+        Film film = super.findById(filmId);
+        userRepository.findById(userId);
+        film.getLikes().remove(userId);
     }
 
-    public Collection<Film> getAll(ModelType modelType) {
-        return super.getAll(modelType);
+    public List<Film> findPopularFilms(Integer count) {
+        return super.getAll().stream()
+                .sorted(Comparator.comparingInt(f -> -1 * f.getLikes().size()))
+                .limit(count)
+                .collect(Collectors.toList());
     }
 }

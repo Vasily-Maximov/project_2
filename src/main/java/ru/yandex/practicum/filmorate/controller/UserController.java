@@ -1,44 +1,53 @@
 package ru.yandex.practicum.filmorate.controller;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.yandex.practicum.filmorate.model.ModelType;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.service.UserService;
-import ru.yandex.practicum.filmorate.validation.CreateGroup;
-import ru.yandex.practicum.filmorate.validation.UpdateGroup;
 import java.util.Collection;
 
 @RestController
 @RequestMapping("/users")
 @Slf4j
-@RequiredArgsConstructor
-public class UserController {
+public class UserController extends AbstractController<User> {
 
     private final UserService userService;
 
-    @PostMapping
-    public User createUser(@Validated(CreateGroup.class) @RequestBody User user) {
-        log.info("Получен запрос на создание сущности {}", user);
-        return userService.create(user);
+    @Autowired
+    public UserController(UserService userService) {
+        super(userService);
+        this.userService = userService;
     }
 
-    @PutMapping
-    public User updateUser(@Validated(UpdateGroup.class) @RequestBody User user) {
-        log.info("Получен запрос на изменение сущности {}", user);
-        return userService.update(user);
+    @PutMapping("/{id}/friends/{friendId}")
+    public void addToFriends(@PathVariable("id") Integer idUser, @PathVariable("friendId") Integer idFriend) {
+        log.info("Получен запрос на добавление в друзья к пользователю с idUser = {}, пользователя с idFriend = {}", idUser,
+                idFriend);
+        userService.addToFriends(idUser, idFriend);
     }
 
-    @GetMapping
-    public Collection<User> getUsers() {
-        log.info("Получен запрос на получение всех сущностей {}", ModelType.USER);
-        return userService.getAll(ModelType.USER);
+    @DeleteMapping("/{id}/friends/{friendId}")
+    public void delToFriends(@PathVariable("id") Integer idUser, @PathVariable("friendId") Integer idFriend) {
+        log.info("Получен запрос на взаимное удаление из друзей пользователя с idUser = {}, пользователя с idFriend = {}", idUser,
+                idFriend);
+        userService.delToFriends(idUser, idFriend);
+    }
+
+    @GetMapping("/{id}/friends")
+    public Collection<User> getFriendsByUser(@PathVariable("id") Integer idUser) {
+        log.info("Получен запрос на возврат списка друзей пользователя с id = {}", idUser);
+        return userService.getFriendsByUser(idUser);
+    }
+
+    @GetMapping("/{id}/friends/common/{otherId}")
+    public Collection<User> getOtherFriendsById(@PathVariable("id") Integer idUser, @PathVariable Integer otherId) {
+        log.info("Получен запрос на возврат списка общих друзей пользователей с id = {} и otherId = {}", idUser, otherId);
+        return userService.getOtherFriendsById(idUser, otherId);
     }
 }

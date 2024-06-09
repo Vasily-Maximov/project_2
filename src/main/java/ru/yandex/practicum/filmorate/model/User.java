@@ -11,6 +11,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @EqualsAndHashCode(callSuper=true)
@@ -27,6 +29,7 @@ public class User extends AbstractModel {
     @NotNull(groups = {CreateGroup.class, UpdateGroup.class})
     @PastOrPresent(groups = {CreateGroup.class, UpdateGroup.class})
     private LocalDate birthday;
+    private Set<Integer> friends;
 
     public User(String email, String login, String name, LocalDate birthday) {
         checkLogin(login);
@@ -34,7 +37,7 @@ public class User extends AbstractModel {
         this.login = login.trim();
         this.name = checkName(name);
         this.birthday = birthday;
-        super.setModelType(ModelType.USER);
+        this.friends = new HashSet<>();
     }
 
     public String checkName(String name) {
@@ -51,5 +54,17 @@ public class User extends AbstractModel {
             log.error(messageError);
             throw new ObjectValidationException(messageError);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + getId() + '\'' +
+                "email='" + email + '\'' +
+                ", login='" + login + '\'' +
+                ", name='" + name + '\'' +
+                ", birthday=" + birthday +
+                ", friends=" + friends +
+                '}';
     }
 }
