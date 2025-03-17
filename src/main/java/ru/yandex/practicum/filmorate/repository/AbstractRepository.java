@@ -37,7 +37,7 @@ public abstract class AbstractRepository<T extends AbstractModel> {
         return data.values();
     }
 
-    public T findById(int id) {
+    public T findById(Integer id) {
         if (data.containsKey(id)) {
             log.info("Получена сущность по id = {}", id);
             return data.get(id);
