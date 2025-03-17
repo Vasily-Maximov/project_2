@@ -3,7 +3,7 @@ package ru.yandex.practicum.filmorate.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.Film;
-import ru.yandex.practicum.filmorate.repository.AbstractRepository;
+import ru.yandex.practicum.filmorate.repository.AbstractRepositoryDao;
 import ru.yandex.practicum.filmorate.repository.UserRepository;
 import java.util.Comparator;
 import java.util.List;
@@ -15,8 +15,8 @@ public class FilmService extends AbstractService<Film> {
     private final UserRepository userRepository;
 
     @Autowired
-    public FilmService(AbstractRepository<Film> abstractRepository, UserRepository userRepository) {
-        super(abstractRepository);
+    public FilmService(AbstractRepositoryDao<Film> abstractRepositoryDao, UserRepository userRepository) {
+        super(abstractRepositoryDao);
         this.userRepository = userRepository;
     }
 

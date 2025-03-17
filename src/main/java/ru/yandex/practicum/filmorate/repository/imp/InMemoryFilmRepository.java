@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.repository.film;
+package ru.yandex.practicum.filmorate.repository.imp;
 
 import org.springframework.stereotype.Repository;
 import ru.yandex.practicum.filmorate.model.Film;
