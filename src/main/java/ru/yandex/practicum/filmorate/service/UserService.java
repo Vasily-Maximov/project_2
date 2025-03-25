@@ -3,8 +3,6 @@ package ru.yandex.practicum.filmorate.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.User;
-import ru.yandex.practicum.filmorate.repository.dao.FriendRepositoryDao;
-import ru.yandex.practicum.filmorate.repository.dao.UserRepositoryDao;
 import ru.yandex.practicum.filmorate.repository.imp.InMemoryFriendRepository;
 import ru.yandex.practicum.filmorate.repository.imp.InMemoryUserRepository;
 import java.util.Collection;
@@ -12,10 +10,10 @@ import java.util.Collection;
 @Service
 public class UserService extends AbstractService<User> {
 
-    private final FriendRepositoryDao friendRepository;
+    private final InMemoryFriendRepository friendRepository;
 
     @Autowired
-    public UserService(UserRepositoryDao userRepository, FriendRepositoryDao friendRepository) {
+    public UserService(InMemoryUserRepository userRepository, InMemoryFriendRepository friendRepository) {
         super(userRepository);
         this.friendRepository = friendRepository;
     }

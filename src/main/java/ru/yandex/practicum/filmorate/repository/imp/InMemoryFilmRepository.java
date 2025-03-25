@@ -1,6 +1,5 @@
 package ru.yandex.practicum.filmorate.repository.imp;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.repository.AbstractRepository;
@@ -9,7 +8,6 @@ import java.util.Collection;
 
 
 @Repository
-@Qualifier("inMemoryFilmRepository")
 public class InMemoryFilmRepository extends AbstractRepository<Film> implements FilmRepository {
 
     @Override

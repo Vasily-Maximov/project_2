@@ -1,7 +1,6 @@
 package ru.yandex.practicum.filmorate.repository.imp;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.repository.UserRepository;
@@ -14,7 +13,7 @@ public class InMemoryFriendRepository {
     private final UserRepository userRepository;
 
     @Autowired
-    public InMemoryFriendRepository(@Qualifier("inMemoryUserRepository") UserRepository userRepository) {
+    public InMemoryFriendRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

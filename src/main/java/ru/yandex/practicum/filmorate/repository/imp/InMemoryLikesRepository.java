@@ -1,11 +1,10 @@
 package ru.yandex.practicum.filmorate.repository.imp;
 
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.repository.FilmRepository;
-import ru.yandex.practicum.filmorate.repository.UserRepository;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,8 +14,8 @@ public class InMemoryLikesRepository {
 
     private final FilmRepository filmRepository;
 
-    public InMemoryLikesRepository(@Qualifier("inMemoryFilmRepository") FilmRepository filmRepository) {
-
+    @Autowired
+    public InMemoryLikesRepository(FilmRepository filmRepository) {
         this.filmRepository = filmRepository;
     }
 
