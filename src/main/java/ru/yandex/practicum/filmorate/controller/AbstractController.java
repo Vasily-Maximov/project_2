@@ -3,10 +3,7 @@ package ru.yandex.practicum.filmorate.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.model.AbstractModel;
 import ru.yandex.practicum.filmorate.service.AbstractService;
 import ru.yandex.practicum.filmorate.validation.CreateGroup;
@@ -35,5 +32,11 @@ public class AbstractController<T extends AbstractModel> {
     public Collection<T> getAll() {
         log.info("Получен запрос на получение сущностей");
         return abstractService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public T findById(@PathVariable("id") int id) {
+        log.info("Получен запрос на получение сущности по id = {}", id);
+        return abstractService.findById(id);
     }
 }

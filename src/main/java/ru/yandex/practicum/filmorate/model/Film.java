@@ -1,6 +1,7 @@
 package ru.yandex.practicum.filmorate.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import ru.yandex.practicum.filmorate.exeption.ObjectValidationException;
 import ru.yandex.practicum.filmorate.validation.CreateGroup;
@@ -14,6 +15,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
+@EqualsAndHashCode
 @Slf4j
 public class Film extends AbstractModel {
 

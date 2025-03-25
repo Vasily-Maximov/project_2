@@ -1,5 +1,6 @@
 package ru.yandex.practicum.filmorate.repository.imp;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.repository.AbstractRepository;
@@ -7,6 +8,7 @@ import ru.yandex.practicum.filmorate.repository.UserRepository;
 import java.util.Collection;
 
 @Repository
+@Qualifier("inMemoryUserRepository")
 public class InMemoryUserRepository extends AbstractRepository<User> implements UserRepository {
 
     @Override
